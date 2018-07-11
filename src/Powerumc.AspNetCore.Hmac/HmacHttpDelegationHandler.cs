@@ -24,15 +24,11 @@ namespace Powerumc.AspNetCore.Hmac
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var serializedAsJson = JsonConvert.SerializeObject(new
-            {
-                time = DateTime.Now.ToTimeStamp()
-            });
-            var encryped = serializedAsJson.EncryptAsHmacHash(_secretKey.ToBytes(), serializedAsJson.ToBytes());
+            var encryped = _data.EncryptAsHmacHash(_secretKey.ToBytes(), _data.ToBytes());
             var encoded = Convert.ToBase64String(encryped);
             
             request.Headers.TryAddWithoutValidation("X-Hmac-Hash", encoded);
-            request.Headers.TryAddWithoutValidation("X-Hmac-Data", serializedAsJson.EncodeBase64());
+            request.Headers.TryAddWithoutValidation("X-Hmac-Data", _data.EncodeBase64());
             
             return base.SendAsync(request, cancellationToken);
         }
