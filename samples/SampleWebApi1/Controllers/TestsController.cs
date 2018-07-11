@@ -20,7 +20,7 @@ namespace SampleWebApi1.Controllers
         [HttpGet]
         public async Task<ActionResult<string>> Get()
         {
-            using (var httpClient = _httpClientFactory.Create("some_secretKey", "data"))
+            using (var httpClient = _httpClientFactory.Create("data"))
             {
                 httpClient.BaseAddress = new Uri("http://localhost:5112");
 

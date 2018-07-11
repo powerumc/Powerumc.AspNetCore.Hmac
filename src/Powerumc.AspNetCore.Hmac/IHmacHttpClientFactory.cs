@@ -5,7 +5,6 @@ namespace Powerumc.AspNetCore.Hmac
 {
     public interface IHmacHttpClientFactory
     {
-        HttpClient Create(string secretKey, string data);
-        HttpClient Create(IConfiguration configuration, string data);
+        HttpClient Create(string data);
     }
 }

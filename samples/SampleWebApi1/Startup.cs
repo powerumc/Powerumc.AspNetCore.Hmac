@@ -27,7 +27,7 @@ namespace SampleWebApi1
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddHmacHttpClientFactory();
+            services.AddHmacHttpClientFactory(options => options.SecretKey = Configuration["SecretKey"]);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

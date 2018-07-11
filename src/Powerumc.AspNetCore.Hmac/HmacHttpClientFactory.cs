@@ -6,18 +6,16 @@ namespace Powerumc.AspNetCore.Hmac
 {
     public class HmacHttpClientFactory : IHmacHttpClientFactory
     {
-        public HttpClient Create(string secretKey, string data)
+        private readonly HmacHttpClientFactoryOptions _options;
+
+        public HmacHttpClientFactory(HmacHttpClientFactoryOptions options)
         {
-            return new HttpClient(new HmacHttpDelegationHandler(secretKey, data));
+            _options = options;
         }
 
-        public HttpClient Create(IConfiguration configuration, string data)
+        public HttpClient Create(string data)
         {
-            var secretKey = configuration["SecretKey"];
-            if (string.IsNullOrWhiteSpace(secretKey))
-                throw new Exception("SecretKey configuration is not set.");
-
-            return Create(secretKey, data);
+            return new HttpClient(new HmacHttpDelegationHandler(_options.SecretKey, data));
         }
     }
 }
