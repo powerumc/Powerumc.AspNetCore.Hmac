@@ -1,5 +1,17 @@
 # Powerumc.AspNetCore.Hmac
 
+## Install
+
+```
+Install-Package Powerumc.AspNetCore.Hmac -Version 1.0.0
+```
+
+or
+
+```
+dotnet add package Powerumc.AspNetCore.Hmac --version 1.0.0
+```
+
 ## Configuration
 
 ```csharp
